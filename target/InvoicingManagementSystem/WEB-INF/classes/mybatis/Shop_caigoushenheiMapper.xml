@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Shop_caigoushenheiDao">
+    <resultMap id="Shop_caigoushenheiEntity" type="Shop_caigoushenheiEntity"></resultMap>
+    <!-- 提交采购审核 -->
+    <insert id="insert" parameterType="Shop_caigoushenheiEntity">  
+		INSERT INTO 
+		shop_caigoushenhei (shop_caigoushenhei_id,shop_caigoushenhei_shop,shop_int_price,shop_int_size,shop_int_allprice,shop_int_yutime,shop_int_shuoming,shop_caigoushenhei_shenqinren,shop_caigoushenhei_shenheiren,shop_caigoushenhei_time,shop_caigoushenhei_zhuangtai,shop_caigou_zhuangtai)
+		VALUE(#{shop_caigoushenhei_id},#{shop_caigoushenhei_shop},#{shop_int_price},#{shop_int_size},#{shop_int_allprice},#{shop_int_yutime},#{shop_int_shuoming},"1",#{shop_caigoushenhei_shenheiren},#{shop_caigoushenhei_time},"待审核","未采购")
+    </insert>
+	<!--查询全部提交信息 -->
+	<select id="find" resultType="Shop_caigoushenheiEntity" parameterType="Shop_caigoushenheiEntity">	
+     SELECT * FROM shop_caigoushenhei limit #{offset},#{limit}
+	</select>
+	<!--查询全部通过审核信息 -->
+	<select id="findzt" resultType="Shop_caigoushenheiEntity" parameterType="Shop_caigoushenheiEntity">	
+     SELECT * FROM shop_caigoushenhei
+     where shop_caigoushenhei_zhuangtai ="已批准"
+     or
+     shop_caigoushenhei_zhuangtai ="未通过"
+     limit #{offset},#{limit}
+	</select>
+	<select id="count"  resultType="int" parameterType="Shop_caigoushenheiEntity">	
+     SELECT count(*) FROM shop_caigoushenhei
+	</select>
+    <!-- 条件查询 -->  
+	  <select id="findby" resultType="Shop_caigoushenheiEntity">
+	     SELECT * FROM shop_caigoushenhei
+	    <where>
+	    	<if test="shop_caigoushenhei_name!=null and shop_caigoushenhei_name!=''">
+	       		shop_caigoushenhei_name like "%"#{shop_caigoushenhei_name}"%"
+	        </if>
+	        <if test="shop_caigoushenhei_danwei!=null and shop_caigoushenhei_danwei!=''">
+	       		or shop_caigoushenhei_danwei like "%"#{shop_caigoushenhei_danwei}"%"
+	        </if>
+	    </where>
+	  </select>
+	<!-- 审核批准 -->
+	<update id="update" parameterType="Shop_caigoushenheiEntity" >   
+		UPDATE  shop_caigoushenhei 
+		<trim prefix="SET" suffixOverrides=",">
+	    <if test="shop_caigoushenhei_shenheiren != null">shop_caigoushenhei_shenheiren=#{shop_caigoushenhei_shenheiren},</if>
+	    <if test="shop_caigoushenhei_qianming!= null">shop_caigoushenhei_qianming=#{shop_caigoushenhei_qianming},</if>
+		shop_caigoushenhei_zhuangtai="已批准",
+		shop_caigoushenhei_shenheiren="1",
+		<if test="shop_caigoushenhei_qianming_lujing != null">shop_caigoushenhei_qianming_lujing=#{shop_caigoushenhei_qianming_lujing},</if>
+		shop_caigoushenhei_time=now()
+		</trim>
+		WHERE shop_caigoushenhei_id=#{shop_caigoushenhei_id}
+	</update>
+	<!-- 审核驳回 -->
+	<update id="updatebohui" parameterType="Shop_caigoushenheiEntity" >   
+		UPDATE  shop_caigoushenhei 
+		<trim prefix="SET" suffixOverrides=",">
+	    <if test="shop_caigoushenhei_bohui != null">shop_caigoushenhei_bohui=#{shop_caigoushenhei_bohui},</if>
+		shop_caigoushenhei_shenheiren="1",
+		shop_caigoushenhei_zhuangtai="未通过",
+		shop_caigoushenhei_time=now()
+		</trim>
+		WHERE shop_caigoushenhei_id=#{shop_caigoushenhei_id}
+	</update>
+	<!-- 采购状态 -->
+	<update id="updatecgzt" parameterType="Shop_caigoushenheiEntity" >   
+		UPDATE  shop_caigoushenhei 
+		set
+		shop_caigou_zhuangtai="已采购"
+		WHERE shop_caigoushenhei_id=#{shop_caigoushenhei_id}
+	</update>
+	<!-- 删除审核信息 -->
+	<delete id="delete">
+		DELETE FROM shop_caigoushenhei WHERE shop_caigoushenhei_id=#{shop_caigoushenhei_id}
+	</delete>
+</mapper>

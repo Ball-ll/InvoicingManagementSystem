@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Shop_gongyinDao">
+    <resultMap id="Shop_gongyinEntity" type="Shop_gongyinEntity"></resultMap>
+    <!-- 供应商录入 -->
+    <insert id="insert" parameterType="Shop_gongyinEntity">  
+		INSERT INTO 
+		shop_gongyin(shop_gongyin_id,shop_gongyin_name,shop_gongyin_user,shop_gongyin_phone,shop_gongyin_address,shop_gongyin_lururen,shop_gongyin_lurutime)
+        VALUES
+        (#{shop_gongyin_id},#{shop_gongyin_name},#{shop_gongyin_user},#{shop_gongyin_phone},#{shop_gongyin_address},'1',NOW());
+    </insert>
+	<!--查询已录入供应商 -->
+	<select id="find" resultMap="Shop_gongyinEntity" parameterType="Shop_gongyinEntity">	
+     SELECT * FROM shop_gongyin
+	</select>
+	 <!-- 条件查询(根据供应商名字"模糊查询") -->  
+	  <select id="findby" resultType="Shop_gongyinEntity">
+	     SELECT * FROM shop_gongyin
+	     <where>
+		     <if test="shop_gongyin_name!=null and shop_gongyin_name!=''">
+	                shop_gongyin_name like "%"#{shop_gongyin_name}"%"
+	         </if>
+         </where>
+	  </select>
+	  
+	<!--查询物料信息(bootstrap) -->
+	<select id="findbt" resultMap="Shop_gongyinEntity" parameterType="Shop_gongyinEntity">	
+      SELECT * FROM shop_gongyin limit #{offset},#{limit}
+	</select>
+	<select id="count"  resultType="int" parameterType="Shop_gongyinEntity">	
+     SELECT count(*) FROM shop_gongyin
+	</select>
+	<!-- 修改供应商信息 -->
+	<update id="update" parameterType="Shop_gongyinEntity" >   
+		UPDATE  shop_gongyin SET shop_gongyin_user=#{shop_gongyin_user},
+		shop_gongyin_phone=#{shop_gongyin_phone},
+		shop_gongyin_address=#{shop_gongyin_address}
+		WHERE shop_gongyin_id=#{shop_gongyin_id}
+	</update>
+	<!-- 删除供应商-->
+	<delete id="delete">
+		DELETE FROM shop_gongyin WHERE shop_gongyin_id=#{shop_gongyin_id}
+	</delete>
+</mapper>

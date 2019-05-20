@@ -1,0 +1,156 @@
+/* CSS Document */
+/*主框架*/
+fieldset {
+	margin-top:0px !important;
+}
+.main{
+	width:1000px;
+	height:1000px;
+	margin:0 auto;
+	position:relative;
+	}
+.pan_logo{
+	width:1000px;
+	height:50px;
+	}
+.pan_logo img{
+	float:left;
+	}
+.pan_logo_left{
+	float:left;
+	line-height:50px;
+	margin-top:5px;
+	}
+.pan_logo_right{
+	cursor:default;
+	float:right;
+	line-height:50px;
+	margin-top:5px;
+	}
+/*横条*/
+.hengtiao{
+	width:100%;
+	height:50px;
+	background:#1296db;
+	position:relative;
+	bottom:950px;
+	}
+/*内容左边*/
+.count_left{
+	width:400px;
+	height:900px;
+	position:absolute;
+	top:100px;
+	float:left;
+	}
+.count_left img{
+	width:400px;
+	height:260px;
+	}
+.ul{
+	border-bottom:#CCC solid 1px;
+	}
+.ul span{
+	margin-left:10px;
+	}
+/*内右左边*/
+.count_right{
+	height:1300px;
+	position:absolute;
+	top:100px;
+	left:500px;
+	}
+.biaoti{
+	width:580px;
+	border-bottom:#CCC solid 1px;
+	margin-left:-80px;
+	height:30px;
+	margin-top:20px;
+	}
+.count_right label{
+	color:#999;
+	}
+.from_input{
+	margin-top:50px;
+	margin-left:10px;
+	width:400px;
+	height:30px;
+	border:#CCC 1px dashed;
+	border-radius:5px;
+	padding-left:5px;
+	}
+.touxiang{
+	position:absolute;
+	height:20px;
+	margin-top:50px;
+	}
+#wrapper{
+	margin-left:30px !important;
+	width:440px !important;
+	margin-top:55px !important;
+	}
+#uploader .placeholder{
+	height:150px !important;
+	padding-top:0px !important;
+	}
+.reset{
+	width:70px;
+	border-radius:5px;
+	height:30px;
+	background:#ccc;
+	color:#FFF;
+	border:0px;
+	margin-top:20px;
+	margin-left:45px;
+	}
+.ok{
+	width:70px;
+	border-radius:5px;
+	height:30px;
+	background:#1296db ;
+	color:#FFF;
+	border:0px;
+	margin-left:260px;
+	}
+.save_input{
+	margin-top:50px;
+	margin-left:10px;
+	width:200px;
+	height:30px;
+	border:#CCC 1px dashed;
+	border-radius:5px;
+	padding-left:5px;
+	}
+/*头部返回*/
+.back{
+	cursor:pointer;
+	}
+/*上传头像div*/
+.up_show_div{
+	margin-left: 48px; 
+	width: 200px; 
+	height: 200px; 
+	border: #CCC 1px dashed; 
+	border-radius: 5px; 
+    display: none;
+    }
+.up_show_img{
+	width: 200px; 
+	height: 200px; 
+	border-radius: 50%;
+}
+.change_img{
+	border:#CCC 1px dashed; 
+	width: 50px;
+	height: 50px; 
+	border-radius: 5px; 
+	margin-left: 260px;
+	margin-top: -52px;
+}
+.up_change_img{
+	border:#CCC 1px dashed; 
+	width: 50px;
+	height: 50px; 
+	border-radius: 5px; 
+	margin-left: 45px;
+}

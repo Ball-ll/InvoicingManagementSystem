@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.dao.Shop_cangkuDao">
+    <resultMap id="Shop_cangkuEntity" type="Shop_cangkuEntity"></resultMap>
+    <!-- 新加仓库-->
+    <insert id="insert" parameterType="Shop_cangkuEntity">  
+		INSERT INTO 
+		shop_cangku (shop_cangku_id,shop_cangku_name,shop_cangku_leixing,shop_cangku_user,shop_cangku_rongliang,shop_cangku_now_rongliang,shop_cangku_weizhi,shop_cangku_zhuangtai)
+		VALUE(#{shop_cangku_id},#{shop_cangku_name},#{shop_cangku_leixing},#{shop_cangku_user},#{shop_cangku_rongliang},#{shop_cangku_now_rongliang},#{shop_cangku_weizhi},"运用中")
+    </insert>
+	<!--查询全部提交信息 -->
+	<select id="find" resultType="Shop_cangkuEntity" parameterType="Shop_cangkuEntity">	
+     SELECT * FROM shop_cangku;
+	</select>
+	<!--根据仓库名查询仓库 -->
+	<select id="findbyname" resultType="Shop_cangkuEntity" parameterType="Shop_cangkuEntity">	
+     SELECT * FROM shop_cangku where shop_cangku_name=#{shop_cangku_name};
+	</select>
+	<select id="count"  resultType="int" parameterType="Shop_cangkuEntity">	
+     SELECT count(*) FROM shop_cangku
+	</select>
+	<!-- 根据id查询物料 -->
+	  <select id="findbyId" resultType="Shop_cangkuEntity">
+	     SELECT * FROM shop_cangku where shop_cangku_id=#{shop_cangku_id};
+	  </select>
+	<!-- 仓库管理-->
+	<update id="update">
+	   UPDATE  shop_cangku  
+	   <trim prefix="SET" suffixOverrides=",">
+	     <if test="shop_cangku_user!=null">shop_cangku_user=#{shop_cangku_user}</if>,
+	     <if test="shop_cangku_weizhi!=null">shop_cangku_weizhi=#{shop_cangku_weizhi}</if>,
+	     <if test="shop_cangku_zhuangtai!=null">shop_cangku_zhuangtai=#{shop_cangku_zhuangtai}</if>
+	   </trim>
+	   where 
+	   shop_cangku_id=#{shop_cangku_id}
+	</update>
+	<!-- 根据仓库名修改容量 -->
+	<update id="update_rongliang">
+	   UPDATE  shop_cangku  
+	   <trim prefix="SET" suffixOverrides=",">
+	     <if test="shop_cangku_now_rongliang!=null">shop_cangku_now_rongliang=#{shop_cangku_now_rongliang}</if>
+	   </trim>
+	   where 
+	   shop_cangku_name=#{shop_cangku_name}
+	</update>
+	<!-- 删除仓库 -->
+	<delete id="delete">
+		DELETE FROM shop_cangku WHERE shop_cangku_id=#{shop_cangku_id}
+	</delete>
+</mapper>

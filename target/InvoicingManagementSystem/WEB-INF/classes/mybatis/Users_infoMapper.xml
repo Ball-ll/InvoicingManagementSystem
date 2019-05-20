@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Users_infoDao">
+	<resultMap id="Users_infoEntity" type="Users_infoEntity"></resultMap>
+	<!-- 用户注册 -->
+	<insert id="insert" parameterType="Users_infoEntity">
+		INSERT INTO
+		users_info (users_id,users_zhanghao,users_pws,users_mail,users_zc_time)
+		VALUE(#{users_id},#{users_zhanghao},#{users_pws},#{users_mail},now())
+	</insert>
+	<!--查询全部提交信息 -->
+	<select id="find" resultType="Users_infoEntity" parameterType="Users_infoEntity">
+		SELECT * FROM users_info
+		limit #{offset},#{limit}
+	</select>
+	<select id="count" resultType="int" parameterType="Users_infoEntity">
+		SELECT count(*) FROM users_info
+	</select>
+    <!--根据用户id查询（用户资料设置） -->
+	<select id="findbyId" resultType="Users_infoEntity" parameterType="Users_infoEntity">
+		SELECT * FROM users_info
+		where users_id=#{users_id}
+	</select>
+	<!--根据用户输入的账号查询（唯一约束以及登录验证） -->
+	<select id="findbyzh" resultType="Users_infoEntity" parameterType="Users_infoEntity">
+		SELECT * FROM users_info
+		where users_zhanghao=#{users_zhanghao}
+	</select>
+	<!--根据用户输入的邮箱查询（唯一约束）-->
+	<select id="findbyna" resultType="Users_infoEntity" parameterType="Users_infoEntity">
+		SELECT * FROM users_info
+		where users_niceng=#{users_niceng}
+	</select>
+	<!--根据用户输入的邮箱查询（唯一约束）-->
+	<select id="findbyem" resultType="Users_infoEntity" parameterType="Users_infoEntity">
+		SELECT * FROM users_info
+		where users_mail=#{users_mail}
+	</select>	
+	<!--根据用户输入的账号查询（唯一约束以及登录验证） -->
+	<select id="findbypws" resultType="Users_infoEntity" parameterType="Users_infoEntity">
+		SELECT * FROM users_info
+		where users_pws=#{users_pws}
+	</select>
+	<!-- 因用户账号为唯一条件 故此根即用户账号修改登录时间 地址 ip-->
+	<update id="updatedlzc">
+	   UPDATE  users_info  
+	   <trim prefix="SET" suffixOverrides=",">
+	     <if test="users_dl_address !=null">users_dl_address=#{users_dl_address},</if>
+	     <if test="users_dl_ip!=null">users_dl_ip=#{users_dl_ip},</if>
+	     users_dl_time=now()
+	   </trim>
+	   where 
+	   users_zhanghao=#{users_zhanghao}
+	</update>
+	<!-- 因用户账号为唯一条件 故此根即用户账号修改登录时间 地址 ip-->
+	<update id="update">
+	   UPDATE  users_info  
+	   <trim prefix="SET" suffixOverrides=",">
+	     <if test="users_niceng !=null">users_niceng=#{users_niceng},</if>
+	     <if test="users_birth!=null">users_birth=#{users_birth},</if>
+	     <if test="users_sex!=null">users_sex=#{users_sex},</if>
+	     <if test="users_phone!=null">users_phone=#{users_phone},</if>
+	     <if test="users_mail!=null">users_mail=#{users_mail},</if>
+	     <if test="users_address!=null">users_address=#{users_address},</if>
+	     <if test="users_touxiang!=null">users_touxiang=#{users_touxiang}</if>
+	   </trim>
+	   where 
+	   users_id=#{users_id}
+	</update>
+	<!-- 用户安全修改（密码已经邮箱）-->
+	<update id="updatesave">
+	   UPDATE  users_info  
+	   <trim prefix="SET" suffixOverrides=",">
+	     <if test="users_pws!=null">users_pws=#{users_pws},</if>
+	     <if test="users_mail!=null">users_mail=#{users_mail}</if>
+	   </trim>
+	   where 
+	   users_id=#{users_id}
+	</update>
+	<!--删除信息（根据id） -->
+	<delete id="delete">
+		delete FROM users_info where shop_id=#{shop_id}
+	</delete>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Shop_infoDao">
+    <resultMap id="Shop_infoEntity" type="Shop_infoEntity"></resultMap>
+    <!-- 录入商品 -->
+    <insert id="insert" parameterType="Shop_infoEntity">  
+		INSERT INTO 
+		shop_info (shop_id,shop_name,shop_int_cangku,shop_size,shop_gongyin_name)
+		VALUE(#{shop_id},#{shop_name},#{shop_int_cangku},#{shop_size},#{shop_gongyin_name})
+    </insert>
+	<!--查询全部提交信息 -->
+	<select id="find" resultType="Shop_infoEntity" parameterType="Shop_infoEntity">	
+     SELECT * FROM shop_info
+     limit #{offset},#{limit}
+	</select>
+	<select id="count"  resultType="int" parameterType="Shop_infoEntity">	
+     SELECT count(*) FROM shop_info
+	</select>
+    <!--根据仓库名查询商品 -->
+	<select id="findbyckname" resultType="Shop_infoEntity" parameterType="Shop_infoEntity">	
+     SELECT * FROM shop_info 
+     where
+     shop_int_cangku=#{shop_int_cangku}
+     and
+     shop_size!=0
+	</select>
+    <!--根据ISBN编码查询（唯一约束） -->
+	<select id="findbyIsbn" resultType="Shop_infoEntity" parameterType="Shop_infoEntity">	
+     SELECT * FROM shop_info 
+     where
+     shop_isbn=#{shop_isbn}
+	</select>
+	<!-- 商品信息管理-->
+	<update id="update">
+	   UPDATE  shop_info  
+	   <trim prefix="SET" suffixOverrides=",">
+	     <if test="shop_isbn!=null">shop_isbn=#{shop_isbn}</if>,
+	     <if test="shop_produced_time!=null">shop_produced_time=#{shop_produced_time}</if>,
+	     <if test="shop_guarantee_time!=null">shop_guarantee_time=#{shop_guarantee_time}</if>,
+	     <if test="shop_price!=null">shop_price=#{shop_price}</if>
+	   </trim>
+	   where 
+	   shop_id=#{shop_id}
+	</update>
+	<!-- 商品出库 -->	
+	<update id="upout" parameterType="Shop_caigouEntity" >   
+		UPDATE  shop_info 
+		<trim prefix="SET" suffixOverrides=",">
+	    <if test="shop_size != null">shop_size=#{shop_size}</if>
+		</trim>
+		WHERE shop_id=#{shop_id}
+	</update>
+	<!--删除商品信息（根据id） -->
+	<delete id="delete">
+	   delete FROM shop_info where shop_id=#{shop_id}
+	</delete>
+</mapper>

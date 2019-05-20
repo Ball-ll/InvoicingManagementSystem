@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Shop_outDao">
+    <resultMap id="Shop_outEntity" type="Shop_outEntity"></resultMap>
+    <!-- 提交采购 -->
+    <insert id="insert" parameterType="Shop_outEntity">  
+		INSERT INTO 
+		shop_out (shop_out_id,shop_name,shop_before_size,shop_out_size,shop_final_size,shop_out_user,shop_out_time)
+		VALUE(#{shop_out_id},#{shop_name},#{shop_before_size},#{shop_out_size},#{shop_final_size},#{shop_out_user},now())
+    </insert>
+	<!--查询全部提交信息 -->
+	<select id="find" resultType="Shop_outEntity" parameterType="Shop_outEntity">	
+     SELECT * FROM shop_out 
+     
+     limit #{offset},#{limit}
+	</select>
+	<select id="count"  resultType="int" parameterType="Shop_outEntity">	
+     SELECT count(*) FROM shop_out
+	</select>
+	<!-- 删除信息 -->
+	<delete id="delete">
+	  DELETE FROM shop_out WHERE shop_out_id=#{shop_out_id}
+	</delete>
+</mapper>

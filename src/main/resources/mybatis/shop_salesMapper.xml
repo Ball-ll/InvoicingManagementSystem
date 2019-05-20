@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Shop_salesDao">
+    <resultMap id="Shop_salesEntity" type="Shop_salesEntity"></resultMap>
+    <!-- 录入商品 -->
+    <insert id="insert" parameterType="Shop_salesEntity">  
+		INSERT INTO 
+		shop_sales (shop_sales_id,shop_sales_shop,shop_sales_cangku,shop_sales_shop_size,shop_sales_shop_danjia,shop_sales_jine,shop_sales_time,shop_sales_user)
+		VALUE(#{shop_sales_id},#{shop_sales_shop},#{shop_sales_cangku},#{shop_sales_shop_size},#{shop_sales_shop_danjia},#{shop_sales_jine},now(),#{shop_sales_user})
+    </insert>
+	<!--查询全部提交信息 -->
+	<select id="find" resultType="Shop_salesEntity" parameterType="Shop_salesEntity">	
+     SELECT * FROM shop_sales
+     limit #{offset},#{limit}
+	</select>
+	<select id="count"  resultType="int" parameterType="Shop_salesEntity">	
+     SELECT count(*) FROM shop_sales
+	</select>
+	<!--删除信息（根据id） -->
+	<delete id="delete">
+	   delete FROM shop_sales where shop_sales_id=#{shop_sales_id}
+	</delete>
+</mapper>

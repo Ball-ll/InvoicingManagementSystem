@@ -1,0 +1,23 @@
+.to_a{
+	text-align:center; 
+	margin:0 auto; 
+	font-size: 16px; 
+	border-bottom: 1px solid #c8baba; 
+	padding: 5px; 
+	width: 90%;
+}
+.to_label{
+	width:100%; 
+	border-bottom: 1px solid #000; 
+	padding: 10px; 
+	font-size: 20px;
+}
+.no_to{
+	border:0; 
+	width: 20%; 
+	margin-top: 10px; 
+	margin-bottom: 10px; 
+	height: 30px; 
+	float: right; 
+	margin-left: 75%;
+}

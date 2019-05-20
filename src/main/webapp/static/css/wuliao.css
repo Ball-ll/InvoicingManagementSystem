@@ -1,0 +1,134 @@
+/* CSS Document */
+.luruyes{
+	background-color:#2181ff; 
+	color:#FFF;
+	width: 100%;
+	padding: .375rem .75rem;
+	line-height: 1.5;
+    border:0px !important;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: 0;	
+	cursor:pointer;
+	}
+.resluru{
+	background-color:#eee; 
+	color:#000;
+	width: 100%;
+	padding: .375rem .75rem;
+	line-height: 1.5;
+    border:0px !important;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: 0;
+	cursor:pointer;
+	}
+/*表格区域*/
+.cz{
+	float:left;
+	height:1.2rem;
+	margin-left:5px;
+	margin-left:10px;
+	}
+.cz_label{
+display:none;
+	}
+.cz_img{
+	vertical-align: top !important;
+	text-align:centerl;
+	}
+.table td{
+	height:50px  !important;	
+	padding-left:.75rem !important;
+	vertical-align:middle !important;
+	cursor:pointer;
+	}
+.table th{
+	cursor: default;
+	}
+/*删除提示框*/
+.delts_div{
+	width:300px;
+	height:100px;
+	border:#eee solid 1px;
+	border-radius:4px;
+	position:absolute;
+	top:20%;
+	left:40%;
+	background-color:#FFF;
+	text-align:center;
+	color:#000;
+	padding-top:20px;
+  	display:none; 
+	}
+.nodel{
+	float:left;
+	width:100px;
+	color:#000;
+	background-color:#eee;
+	border:0;
+	margin-left:20px;
+	margin-top:20px;
+	}
+.yesdel{
+	float: right;
+	width:100px;
+	color:#FFF;
+	background-color:#2181ff;
+	border:0;
+	margin-right:20px;
+	margin-top:20px;
+	}
+/*条件搜索*/
+.findby{
+	float: right;
+}
+.findby_input{
+	width: 66%;
+	padding: .375rem .75rem;
+	line-height: 1.5;
+	color: #777;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: 0;
+}
+.findby_button{
+	background-color:#eee; 
+	color:#000;
+	width: 30%;
+	padding: .375rem .75rem;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	cursor:pointer;
+}
+/*返回全部信息*/
+.bkquanbu{
+	background-color:#eee; 
+	color:#000;
+	width: 10%;
+	padding: .375rem .75rem;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	cursor:pointer;
+	float: right;
+}
+
+/*修改提示框*/
+.update_div{
+	vertical-align:middle;
+	}
+.update_div label{
+	line-height:2rem;
+	}
+.update_txt{
+	float:right;
+	width:90%;
+	border:1px solid #CCC;
+	display:block;
+	border-radius:2%;
+	}
+/*禁用iuput*/
+.disabled{
+	disabled:disabled;
+}

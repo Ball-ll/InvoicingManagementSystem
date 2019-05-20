@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Shop_wuliaoDao">
+    <resultMap id="Shop_wuliaoEntity" type="Shop_wuliaoEntity"></resultMap>
+    <!-- 物料录入 -->
+    <insert id="insert" parameterType="Shop_wuliaoEntity">  
+		INSERT INTO 
+		shop_wuliao(shop_wuliao_id,shop_wuliao_name,shop_wuliao_type,shop_wuliao_guige,shop_wuliao_danwei,shop_wuliao_lururen,shop_wuliao_qubie,shop_wuliao_leixing,shop_wuliao_lurutime)
+		VALUE(#{shop_wuliao_id},#{shop_wuliao_name},#{shop_wuliao_type},#{shop_wuliao_guige},#{shop_wuliao_danwei},'1',#{shop_wuliao_qubie},#{shop_wuliao_leixing},NOW())
+    </insert>
+	<!--查询物料信息 -->
+	<select id="find" resultType="Shop_wuliaoEntity" parameterType="Shop_wuliaoEntity">	
+     SELECT * FROM shop_wuliao
+	</select>
+	<!--判断系统是否已有当前规格物料-->
+	<select id="findbywuliaona" resultType="Shop_wuliaoEntity" parameterType="Shop_wuliaoEntity">	
+     SELECT * FROM shop_wuliao
+     where
+     shop_wuliao_name=#{shop_wuliao_name}
+	</select>
+	<!--查询物料信息(bootstrap) -->
+	<select id="findbt" resultType="Shop_wuliaoEntity" parameterType="Shop_wuliaoEntity">	
+     SELECT * FROM shop_wuliao limit #{offset},#{limit}
+	</select>
+	<select id="count"  resultType="int" parameterType="Shop_wuliaoEntity">	
+     SELECT count(*) FROM shop_wuliao
+	</select>
+    <!-- 条件查询 -->  
+	  <select id="findby" resultType="Shop_wuliaoEntity">
+	     SELECT * FROM shop_wuliao
+	    <where>
+	    	<if test="shop_wuliao_name!=null and shop_wuliao_name!=''">
+	       		shop_wuliao_name like "%"#{shop_wuliao_name}"%"
+	        </if>
+	        <if test="shop_wuliao_danwei!=null and shop_wuliao_danwei!=''">
+	       		or shop_wuliao_danwei like "%"#{shop_wuliao_danwei}"%"
+	        </if>
+	    </where>
+	  </select>
+	<!-- 根据id查询物料 -->
+	  <select id="findbyId" resultType="Shop_wuliaoEntity">
+	     SELECT * FROM shop_wuliao where shop_wuliao_id=#{shop_wuliao_id};
+	  </select>
+	<!-- 删除物料 -->
+	<delete id="delete">
+		DELETE FROM shop_wuliao WHERE shop_wuliao_id=#{shop_wuliao_id}
+	</delete>
+</mapper>

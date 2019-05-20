@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Shop_caigouDao">
+    <resultMap id="Shop_caigouEntity" type="Shop_caigouEntity"></resultMap>
+    <!-- 提交采购 -->
+    <insert id="insert" parameterType="Shop_caigouEntity">  
+		INSERT INTO 
+		shop_caigou (shop_caigou_id,shop_name,shop_id,shop_gongyin_name,shop_int_price,shop_int_shijiprice,shop_int_size,shop_int_shijisize,shop_int_allprice,shop_int_time,shop_int_user,shop_int_pay,shop_int_cangku,shop_int_payforuser,shop_int_chajia,shop_int_chajiastate)
+		VALUE(#{shop_caigou_id},#{shop_name},#{shop_id},#{shop_gongyin_name},#{shop_int_price},#{shop_int_shijiprice},#{shop_int_size},#{shop_int_shijisize},#{shop_int_allprice},#{shop_int_time},#{shop_int_user},#{shop_int_pay},#{shop_int_cangku},#{shop_int_payforuser},#{shop_int_chajia},#{shop_int_chajiastate})
+    </insert>
+	<!--查询全部提交信息 -->
+	<select id="findbyckname" resultType="Shop_caigouEntity" parameterType="Shop_caigouEntity">	
+     SELECT * FROM shop_caigou 
+     where
+     shop_int_cangku=#{shop_int_cangku}
+     limit #{offset},#{limit}
+	</select>
+	<select id="count"  resultType="int" parameterType="Shop_caigouEntity">	
+     SELECT count(*) FROM shop_caigou
+	</select>
+</mapper>
